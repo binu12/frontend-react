@@ -1,0 +1,26 @@
+version: '3'
+services: 
+ web:
+  privileged: true
+  build:
+   context: .
+   dockerfile: Dockerfile.dev
+  ports:
+   - "3000:3000"
+  volumes:
+   - /app/node_modules
+   - .:/app
+   - /auto:/app/auto
+
+ tests:
+  privileged: true
+  build:
+   context: .
+   dockerfile: Dockerfile.dev
+  volumes:
+   - /app/node_modules
+   - .:/app
+   - /auto:/app/auto
+  command: ["npm", "run", "test"] 
+ 
+
